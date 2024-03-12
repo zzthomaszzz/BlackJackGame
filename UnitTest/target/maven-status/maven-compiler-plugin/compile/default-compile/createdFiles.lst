@@ -1,0 +1,5 @@
+com\mycompany\unittest\BlackJack\Deck.class
+com\mycompany\unittest\BlackJack\Card$rank.class
+com\mycompany\unittest\BlackJack\Card.class
+com\mycompany\unittest\BlackJack\Main.class
+com\mycompany\unittest\BlackJack\Card$suit.class
