@@ -4,8 +4,8 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Deck deck = new Deck(1);
-        deck.shuffle();
-        deck.showCards();
+        Game game = new Game(new Player("Thomas", 1000), new Deck(6));
+        game.startNewRound();
+        game.showOptions();
     }
 }
