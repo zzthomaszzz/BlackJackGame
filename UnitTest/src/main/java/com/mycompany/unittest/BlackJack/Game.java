@@ -64,6 +64,17 @@ public class Game
                 this.setRoundEnd(true);
             }
         }
+        if(input == 2)
+        {
+            if(player.getCurrentHand().getSoftTotal() > player.getCurrentHand().getHardTotal() && player.getCurrentHand().getSoftTotal() < 21)
+            {
+                player.getCurrentHand().setFinalPoint(player.getCurrentHand().getSoftTotal());
+            }
+            else
+            {
+                player.getCurrentHand().setFinalPoint(player.getCurrentHand().getHardTotal());
+            }
+        }
     }
     
 }

@@ -16,6 +16,5 @@ public class Main
             input = myObj.nextInt();
             game.perform(input);
         }
-
     }
 }

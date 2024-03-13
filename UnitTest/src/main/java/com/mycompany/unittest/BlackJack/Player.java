@@ -54,7 +54,7 @@ public final class Player
             if(result[0] != 21 && result[1] != 21)
             {
                 System.out.print("Points: " + result[0]);
-                if(result[1] != 0 && result[1] > result[0])
+                if(result[1] != 0 && result[1] > result[0] && result[1] < 21)
                 {
                     System.out.print(" - Soft " + result[1] + ". ");
                 }

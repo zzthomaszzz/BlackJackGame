@@ -6,7 +6,7 @@ public class Hand
 {
     private int hardTotal = 0;
     private int softTotal = 0;
-    private final int[]total = new int[]{hardTotal, softTotal};
+    private final int[]total = new int[]{0, 0};
     private final ArrayList<Card> hand = new ArrayList<>();
     private int finalPoint;
     private boolean splittable = false;
@@ -21,7 +21,6 @@ public class Hand
         for(Card _card : this.hand)
         {            
             _card.show();
-
         }
     }
     
@@ -73,6 +72,10 @@ public class Hand
         return this.hardTotal;
     }
     
+    public int getSoftTotal()
+    {
+        return this.softTotal;
+    }
 
     public int[] getTotal() 
     {   
