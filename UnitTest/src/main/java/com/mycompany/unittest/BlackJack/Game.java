@@ -1,80 +1,67 @@
 package com.mycompany.unittest.BlackJack;
 
-public class Game 
-{
+public class Game {
     private final Player player;
     private final Deck deck;
     private final Dealer dealer = new Dealer();
-    private boolean roundEnd = false;
     
-    public Game(Player player, Deck deck)
-    {
-        System.out.println("Enter 0 to exit the game anytime");
+    public Game(Player player, Deck deck){
         this.player = player;
         this.deck = deck;
         this.deck.shuffle();
     }
     
-    public Player getPlayer()
-    {
-        return this.player;
-    }
-    
-    public void setRoundEnd(boolean status)
-    {
-        this.roundEnd = status;
-    }
-    
-    public boolean getRoundEnd()
-    {
-        return this.roundEnd;
-    }
-    
-    public void startNewRound()
-    {
+    public void startNewRound(){
         player.draw(deck.deal());
         dealer.draw(deck.deal());
         player.draw(deck.deal());
         dealer.drawFaceDown(deck.deal());
         player.showHand();
+        player.getHand().calcFinalScore();
+        dealer.showStartingHand();
+        this.dealerTurn(player.getHand().getFinalScore());
+        this.findWinner();
+    }
+    
+    public void dealerTurn(int scoreToBeat){
+        dealer.reveal();
         dealer.showHand();
+        dealer.getHand().calcFinalScore();
+        while(dealer.getHand().getFinalScore() < scoreToBeat && dealer.getHand().getHardScore() < 17){
+            if(dealer.hand.getSoftScore() > scoreToBeat && dealer.hand.getSoftScore() < 21){
+                dealer.showHand();
+                break;
+            }
+            else{
+                System.out.println("Dealer draws one card");
+                dealer.draw(deck.deal());
+                dealer.showHand();
+                dealer.getHand().calcScore();
+            }
+        }
+        dealer.getHand().calcFinalScore();
     }
     
-    public void showOptions()
-    {
-        System.out.println("What would you like to do?");
-        System.out.println("1.Hit");
-        System.out.println("2.Stand");
-        System.out.println("3.Double");
-        if(player.getCurrentHand().isSplitable())
-        {
-            System.out.println("4.Split");
-        }
-    }
-    
-    public void perform(int input)
-    {
-        if(input == 1)
-        {
-            player.draw(deck.deal());
-            player.showHand();
-            if(player.getCurrentHand().getHardTotal() > 21)
-            {
-                System.out.println("Busted");
-                this.setRoundEnd(true);
+    public void findWinner(){
+        System.out.println("Dealer's Score: " + dealer.getHand().getFinalScore());
+        System.out.println("Player's Score: " + player.getHand().getFinalScore());
+        if(dealer.getHand().getFinalScore() >= player.getHand().getFinalScore()){
+            if(dealer.getHand().getFinalScore() < 22){
+                System.out.println("Dealer wins");
+            }
+            else{
+                System.out.println("Player wins - Dealer Bust");
             }
         }
-        if(input == 2)
-        {
-            if(player.getCurrentHand().getSoftTotal() > player.getCurrentHand().getHardTotal() && player.getCurrentHand().getSoftTotal() < 21)
-            {
-                player.getCurrentHand().setFinalPoint(player.getCurrentHand().getSoftTotal());
+        else if(player.getHand().getFinalScore() > dealer.getHand().getFinalScore()){
+            if(player.getHand().getFinalScore() < 22){
+                System.out.println("Player wins");
             }
-            else
-            {
-                player.getCurrentHand().setFinalPoint(player.getCurrentHand().getHardTotal());
+            else{
+                System.out.println("Dealer wins - Player Bust");
             }
         }
+        
     }
     
 }

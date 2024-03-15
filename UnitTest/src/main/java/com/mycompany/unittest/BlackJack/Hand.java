@@ -2,84 +2,83 @@ package com.mycompany.unittest.BlackJack;
 
 import java.util.ArrayList;
 
-public class Hand 
-{
-    private int hardTotal = 0;
-    private int softTotal = 0;
-    private final int[]total = new int[]{0, 0};
+public class Hand {
     private final ArrayList<Card> hand = new ArrayList<>();
-    private int finalPoint;
-    private boolean splittable = false;
+    private int softScore;
+    private int hardScore;
+    private int finalScore;
+    
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
 
-    public void add(Card card) 
-    {
+    public void add(Card card) {
         hand.add(card);
     }
     
-    public void show()
-    {
-        for(Card _card : this.hand)
-        {            
-            _card.show();
+    public void showHand(){
+        for(Card _card : this.hand){
+            System.out.print(_card.toString());
         }
     }
     
-    public void setFinalPoint(int point)
-    {
-        this.finalPoint = point;
+    public void showScore(){
+        this.calcScore();
+        System.out.print("Score: " + this.hardScore + " ");
+        if(this.softScore != 0){
+            System.out.print("Soft: " + this.softScore);
+        }
     }
     
-    public int getFinalPoint()
-    {
-        return this.finalPoint;
+    public int getHardScore(){
+        return this.hardScore;
     }
     
-    public boolean isSplitable()
-    {   
-        this.splittable = hand.size() == 2 && hand.getFirst().getPoint() == hand.getLast().getPoint();
-        return this.splittable;
+    public int getSoftScore(){
+        return this.softScore;
+    }
+    
+    public int getFinalScore(){
+        return this.finalScore;
+    }
+    
+    public void calcScore(){
+        this.calcHardScore();
+        this.calcSoftScore();
+    }
+    
+    public void calcFinalScore(){
+        if(this.softScore > this.hardScore){
+            this.finalScore = this.softScore;
+        }
+        else{
+            this.finalScore = this.hardScore;
+        }
     }
 
-    private void calculatePoint() 
-    {
-        this.hardTotal = 0;
-        this.softTotal = 0;
-        for (Card card : hand) 
-        {
-            int point = card.getPoint();
-            if (point == 1) 
-            {
-                this.softTotal += 11;
+    private void calcSoftScore(){
+        boolean hasAce = false;
+        int total = 0;
+        for(Card card : hand){
+            total += card.getPoint();
+            if(card.getPoint() == 1 && !hasAce){
+                total += 10;
+                hasAce = true;
             }
-            else
-            {
-                this.softTotal += point;
-            }
-
-            this.hardTotal += point;
-            
         }
-        if(this.softTotal > 21)
-        {
-            this.softTotal -= 10;
+        if(total < 22 && hasAce){
+            this.softScore = total;
         }
-        this.total[0] = this.hardTotal;
-        this.total[1] = this.softTotal;
+        else{
+            this.softScore = 0;
+        }
     }
     
-    public int getHardTotal()
-    {
-        return this.hardTotal;
-    }
-    
-    public int getSoftTotal()
-    {
-        return this.softTotal;
-    }
-
-    public int[] getTotal() 
-    {   
-        this.calculatePoint();
-        return this.total;
+    private void calcHardScore(){
+        int total = 0;
+        for(Card card : hand){
+            total += card.getPoint();
+        }
+        this.hardScore = total;
     }
 }
