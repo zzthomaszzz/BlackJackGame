@@ -16,10 +16,4 @@ public final class Player {
         this.hand.add(card);
     }
     
-    public void showHand(){
-        System.out.println("***"+this.name + "'s Hand: ***");
-        hand.showHand();
-        hand.showScore();
-        System.out.println("\n");
-    }   
 }

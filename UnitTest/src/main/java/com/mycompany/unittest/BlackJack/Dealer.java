@@ -13,21 +13,7 @@ public class Dealer
         this.hand.add(card);
     }
     
-    public void showStartingHand(){
-        System.out.println("***Dealer's Hand: ***");
-        hand.showHand();
-        hand.calcScore();
-        System.out.println("\n");
-    }
-    
-    public void showHand(){
-        System.out.println("***Dealer's Hand: ***");
-        this.hand.showHand();
-        this.hand.showScore();
-        System.out.println("\n");
-    }
-    
-    public void reveal(){
+    public void turnHiddenCard(){
         for(Card card : this.hand.getHand()){
             card.turnFaceUp();
         }

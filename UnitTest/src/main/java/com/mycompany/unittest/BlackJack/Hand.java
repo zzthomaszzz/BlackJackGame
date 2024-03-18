@@ -8,6 +8,15 @@ public class Hand {
     private int hardScore;
     private int finalScore;
     
+    public boolean hasAce(){
+        for(Card card : hand){
+            if(card.getPoint() == 1){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public ArrayList<Card> getHand(){
         return hand;
     }
@@ -16,17 +25,9 @@ public class Hand {
         hand.add(card);
     }
     
-    public void showHand(){
+    public void show(){
         for(Card _card : this.hand){
             System.out.print(_card.toString());
-        }
-    }
-    
-    public void showScore(){
-        this.calcScore();
-        System.out.print("Score: " + this.hardScore + " ");
-        if(this.softScore != 0){
-            System.out.print("Soft: " + this.softScore);
         }
     }
     
@@ -45,17 +46,18 @@ public class Hand {
     public void calcScore(){
         this.calcHardScore();
         this.calcSoftScore();
+        this.calcFinalScore();
     }
     
-    public void calcFinalScore(){
-        if(this.softScore > this.hardScore){
+    private void calcFinalScore(){
+        if(this.softScore > this.hardScore && this.softScore < 22){
             this.finalScore = this.softScore;
         }
         else{
             this.finalScore = this.hardScore;
         }
     }
-
+    
     private void calcSoftScore(){
         boolean hasAce = false;
         int total = 0;
@@ -66,12 +68,7 @@ public class Hand {
                 hasAce = true;
             }
         }
-        if(total < 22 && hasAce){
-            this.softScore = total;
-        }
-        else{
-            this.softScore = 0;
-        }
+        this.softScore = total;
     }
     
     private void calcHardScore(){
