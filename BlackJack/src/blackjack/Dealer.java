@@ -1,4 +1,4 @@
-package com.mycompany.unittest.BlackJack;
+package blackjack;
 
 public class Dealer
 {

@@ -1,9 +1,0 @@
-com\mycompany\unittest\BlackJack\Deck.class
-com\mycompany\unittest\BlackJack\Card.class
-com\mycompany\unittest\BlackJack\Hand.class
-com\mycompany\unittest\BlackJack\Player.class
-com\mycompany\unittest\BlackJack\Card$Suit.class
-com\mycompany\unittest\BlackJack\Game.class
-com\mycompany\unittest\BlackJack\Card$Rank.class
-com\mycompany\unittest\BlackJack\Main.class
-com\mycompany\unittest\BlackJack\Dealer.class
