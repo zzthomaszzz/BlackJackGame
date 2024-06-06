@@ -18,6 +18,7 @@ public class GameWindow implements ActionListener {
     Player player = game.getPlayer();
     Dealer dealer = game.getDealer();
     Deck deck = game.getDeck();
+    int playerScore = 0;
     ArrayList<JButton> playerCard = new ArrayList<>();
 
     //Testing
@@ -35,7 +36,7 @@ public class GameWindow implements ActionListener {
         doubleButton.setBounds(350, 480, 100, 25);
         doubleButton.setFocusable(false);
         
-        playerScoreButton.setBounds(375, 420, 100, 25);
+        playerScoreButton.setBounds(375, 420, 150, 25);
         playerScoreButton.setFocusable(false);
 
         frame.add(hitButton);
@@ -88,6 +89,7 @@ public class GameWindow implements ActionListener {
                 AceOneTime = true;
             }
         }
+        playerScore = point;
         playerScoreButton.setText("Score: " + point);
     }
     
@@ -99,6 +101,17 @@ public class GameWindow implements ActionListener {
     
     private void clearPlayerCard(){
         player.getHand().clear();
+    }
+    
+    private void update(){
+        if (playerScore > 21){
+            playerScoreButton.setText("Score: " + playerScore + " Busted!!!");
+            hitButton.setEnabled(false);
+        }
+        else{
+            this.updateScore();
+            hitButton.setEnabled(true);
+        }
     }
     
     private int findOrigin(int amount, int width){
@@ -128,6 +141,7 @@ public class GameWindow implements ActionListener {
             this.clearPlayerCard();
             this.updateScore();
         }
+        this.update();
         SwingUtilities.updateComponentTreeUI(frame);
     }
 }
