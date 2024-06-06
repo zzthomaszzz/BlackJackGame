@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Player
 {
-    public int money;
-    public String name;
-    public ArrayList<Card> hand  = new ArrayList<>();
+    private int money;
+    private String name;
+    private ArrayList<Card> hand  = new ArrayList<>();
     
     public Player(String name, int money)
     {
@@ -17,6 +17,27 @@ public class Player
     public void add(Card card)
     {
         this.hand.add(card);
+    }
+    
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public int getMoney(){
+        return money;
+    }
+    
+    public int addMoney(int amount){
+        if(money - amount < 0){
+            return money;
+        }
+        else{
+            return money - amount;
+        }
     }
 
 }

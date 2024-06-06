@@ -10,6 +10,7 @@ public class LaunchWindow implements ActionListener {
     JFrame frame = new JFrame();
     JButton startButton = new JButton("Start");
     JLabel gameTitle = new JLabel("Welcome To The Black Jack Game");
+    
     LaunchWindow(){
 
         startButton.setBounds(300, 280, 200, 40);

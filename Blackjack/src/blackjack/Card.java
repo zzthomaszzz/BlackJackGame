@@ -13,6 +13,8 @@ public class Card
     {
         this.rank = value;
         this.suit = suit;
+        this.height = 120;
+        this.width = 90;
         setPoint(this.rank.ordinal() + 1);
     }
     
@@ -48,7 +50,7 @@ public class Card
 
     public String toString(){
         if(this.isFaceUp){
-            return this.suit.toString() + " of " + this.rank;
+            return this.rank + " ";
         }
         else{
             return "Hidden";
@@ -63,5 +65,13 @@ public class Card
     public int getPoint()
     {
         return this.point;
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public int getHeight(){
+        return height;
     }
 }
