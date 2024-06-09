@@ -31,13 +31,17 @@ public class Player
         return money;
     }
     
-    public int addMoney(int amount){
+    public int subtractMoney(int amount){
         if(money - amount < 0){
             return money;
         }
         else{
             return money - amount;
         }
+    }
+
+    public void addMoney(int amount){
+        money += amount;
     }
 
 }

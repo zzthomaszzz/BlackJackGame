@@ -5,7 +5,8 @@ import java.util.Collections;
 
 public class Deck 
 {
-    private final ArrayList<Card> deck = new ArrayList<>();
+    private ArrayList<Card> deck = new ArrayList<>();
+    private ArrayList<Card> copiedDeck = new ArrayList<>();
     public Deck(int amount)
     {
         for(int i = 0; i < amount; i++)
@@ -18,6 +19,7 @@ public class Deck
                 }
             }
         }
+        copiedDeck = deck;
     }
     
     public void shuffle()
@@ -27,9 +29,13 @@ public class Deck
     
     public Card draw()
     {
-        Card drawnCard = this.deck.get(0);
-        this.deck.remove(0);
-        return drawnCard;
+        if(deck.isEmpty()){
+            deck = copiedDeck;
+        }
+            Card drawnCard = this.deck.get(0);
+            this.deck.remove(0);
+            return drawnCard;
+
     }
 
 }
